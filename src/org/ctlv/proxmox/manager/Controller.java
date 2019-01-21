@@ -27,13 +27,13 @@ public class Controller {
 		api.stopCT(server, Integer.toString(2200+minCT(server)));
 	}
 	
-	//recuperer le nombre le plus grand généré pour nos CTs
+	//recuperer le nombre le plus petit généré pour nos CTs actives
 	public int minCT(String srv) throws LoginException, JSONException, IOException{
 				int min = 99;
 				List<LXC> cts = api.getCTs(srv);
 				for (LXC lxc : cts) {
-					if(Integer.parseInt(lxc.getVmid())>=2200 && Integer.parseInt(lxc.getVmid())<2300){
-					System.out.println("\t" +lxc.getName() +", id : "+ lxc.getVmid());
+					if(Integer.parseInt(lxc.getVmid())>=2200 && Integer.parseInt(lxc.getVmid())<2300 &&lxc.getStatus()=="running"){
+					System.out.println("\t" +lxc.getName() +", id : "+ lxc.getVmid()+", status : "+ lxc.getStatus());
 					int val = Integer.parseInt(lxc.getVmid())-2200;
 					if(val<min){min = val ;}
 					}
