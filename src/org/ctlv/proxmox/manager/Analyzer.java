@@ -20,8 +20,8 @@ public class Analyzer {
 		this.controller = controller;
 	}
 	
-	//public void analyze(Map<String, List<LXC>> myCTsPerServer) throws LoginException, JSONException, IOException  {
-	public void analyze() throws LoginException, JSONException, IOException  {
+	public void analyze(Map<String, List<LXC>> myCTsPerServer) throws LoginException, JSONException, IOException  {
+	//public void analyze() throws LoginException, JSONException, IOException  {
 
 		// Calculer la quantité de RAM utilisée par mes CTs sur chaque serveur
 		long memOnServer1 = 0;
