@@ -19,7 +19,11 @@ public class Controller {
 	
 	// migrer un conteneur du serveur "srcServer" vers le serveur "dstServer"
 	public void migrateFromTo(String srcServer, String dstServer) throws LoginException, JSONException, IOException  {
+		System.out.println(Integer.toString(2200+minCT(srcServer)));
+		System.out.println(api.getCT(srcServer, Integer.toString(2200+minCT(srcServer))).getStatus());
+		api.stopCT(srcServer, Integer.toString(2200+minCT(srcServer)));
 		api.migrateCT(srcServer, Integer.toString(2200+minCT(srcServer)), dstServer);
+		System.out.println(api.getCT(srcServer, Integer.toString(2200+minCT(srcServer))).getStatus());
 	}
 
 	// arrêter le plus vieux conteneur sur le serveur "server"
@@ -32,7 +36,7 @@ public class Controller {
 				int min = 99;
 				List<LXC> cts = api.getCTs(srv);
 				for (LXC lxc : cts) {
-					if(Integer.parseInt(lxc.getVmid())>=2200 && Integer.parseInt(lxc.getVmid())<2300 &&lxc.getStatus()=="running"){
+					if(Integer.parseInt(lxc.getVmid())>=2200 && Integer.parseInt(lxc.getVmid())<2300 && lxc.getStatus().equals("running")){
 					System.out.println("\t" +lxc.getName() +", id : "+ lxc.getVmid()+", status : "+ lxc.getStatus());
 					int val = Integer.parseInt(lxc.getVmid())-2200;
 					if(val<min){min = val ;}
